@@ -4,13 +4,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
 
-from forms import LeadForm
+
 
 app = Flask(__name__)
 CORS(app)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(basedir, "leads.sqlite")
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(basedir, "app.sqlite")
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
@@ -34,7 +34,7 @@ class LeadSchema(ma.Schema):
         fields = ("id", "fname", "lname", "phone", "email")
 
 lead_schema = LeadSchema()
-leads_schema = LeadsSchema()
+leads_schema = LeadSchema(many=True)
 
 @app.route("/lead", methods=["POST"])
 def add_lead():
@@ -67,13 +67,13 @@ def delete_lead(id):
     return jsonify("Lead Deleted")
 
  
-@app.route('/')
-def home():
-    return 'Home Page'
+# @app.route('/')
+# def home():
+#     return 'Home Page'
 
-@app.route('/contact')
-def home():
-    return 'Contact Us'
+# @app.route('/contact')
+# def home():
+#     return 'Contact Us'
 
 if __name__ == '__main__':
     app.debug = True
