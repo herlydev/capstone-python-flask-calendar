@@ -21,7 +21,7 @@ class Lead(db.Model):
     fname = db.Column(db.String(25), nullable=False)
     lname = db.Column(db.String(25), nullable=False)
     phone = db.Column(db.String(10), nullable=False)
-    email = db.Column(db.String(130), unique=True, nullable=False)
+    email = db.Column(db.String(130), nullable=False)
 
     def __init__(self, fname, lname, phone, email):
         self.fname = fname
@@ -65,15 +65,6 @@ def delete_lead(id):
     db.session.commit()
 
     return jsonify("Lead Deleted")
-
- 
-# @app.route('/')
-# def home():
-#     return 'Home Page'
-
-# @app.route('/contact')
-# def home():
-#     return 'Contact Us'
 
 if __name__ == '__main__':
     app.debug = True
