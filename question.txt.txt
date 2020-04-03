@@ -1,1 +1,0 @@
-postmans: post and delete works... but GET does not
